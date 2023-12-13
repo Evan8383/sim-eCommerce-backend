@@ -17,7 +17,7 @@ Category.init(
       allowNull: false,
       unique: true,
       validate: {
-        
+        isAlphanumeric: true
       }
     }
   },

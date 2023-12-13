@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
   try {
     const { category_name: name } = req.body
     if (!name) return res.status(400).json('Please enter a category name')
-    
+
     const newCategory = await Category.create({ category_name: name })
     res.json(newCategory)
   } catch (err) {
@@ -34,12 +34,25 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/:id', (req, res) => {
-  // update a category by its `id` value
+router.put('/:id', async (req, res) => {
+  try {
+    const categoryId = req.params.id
+    const { category_name: categoryName } = req.body
+    if (!categoryName) return res.status(404).json('Please enter a category name to update')
+
+    const updateCategoryName = await Category.update({ category_name: categoryName }, {
+      where: {
+        id: categoryId
+      }
+    });
+    res.json(updateCategoryName)
+  } catch (err) {
+    res.status(500).json(err)
+  }
 });
 
 router.delete('/:id', (req, res) => {
-  // delete a category by its `id` value
+  
 });
 
 module.exports = router;
