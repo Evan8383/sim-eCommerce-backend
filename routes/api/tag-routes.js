@@ -4,12 +4,21 @@ const { findAll } = require('../../models/Category');
 
 // The `/api/tags` endpoint
 router.get('/', async (req, res) => {
+    const { tag_name: tagName } = req.query
+
+    if (!(tagName)) {
+        const getAllTags = await Tag.findAll({
+            include: [ Product ]
+        })
+        return res.json(getAllTags)
+    }
+
     const getAllTags = await Tag.findAll({
-        include: [
-            Product
-        ]
-    })
-    res.json(getAllTags)
+        include: [ Product ]
+    });
+    
+    const matchingTagNames = getAllTags.filter(({ tag_name }) => tag_name.includes(tagName))
+    res.status(206).json(matchingTagNames)
 });
 
 router.get('/:id', async (req, res) => {
@@ -37,7 +46,7 @@ router.post('/', async (req, res) => {
             }
         })
         const newProductTag = await ProductTag.bulkCreate(productTagIdArr)
-        const getCreatedTag = await Tag.findByPk(newTag.id,{
+        const getCreatedTag = await Tag.findByPk(newTag.id, {
             include: [
                 Product
             ]
