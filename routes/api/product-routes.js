@@ -22,13 +22,19 @@ router.get('/', async (req, res) => {
 
 // get one product
 router.get('/:id', async (req, res) => {
-  const productId = req.params.id
-  const product = await Product.findByPk(productId, {
-    include: [
-      Category,
-      Tag
-    ]
-  }) 
+  try{
+    const productId = req.params.id
+    const product = await Product.findByPk(productId, {
+      include: [
+        Category,
+        Tag
+      ]
+    })
+    if (!product) return res.status(404).json('No product found with that id')
+    res.json(product) 
+  } catch (err) {
+    res.json(err)
+  }
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
 });
@@ -110,7 +116,14 @@ router.put('/:id', (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
+  const productId = req.params.id
+  const productToDelete = await Product.destroy({
+    where: {
+      id: productId
+    }
+  });
+  res.json(productToDelete)
   // delete one product by its `id` value
 });
 
