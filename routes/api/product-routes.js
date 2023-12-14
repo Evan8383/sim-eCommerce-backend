@@ -16,8 +16,6 @@ router.get('/', async (req, res) => {
   } catch (err){
     res.status(500).json(err)
   }
-  //// find all products
-  //// be sure to include its associated Category and Tag data
 });
 
 // get one product
@@ -35,8 +33,6 @@ router.get('/:id', async (req, res) => {
   } catch (err) {
     res.json(err)
   }
-  // find a single product by its `id`
-  // be sure to include its associated Category and Tag data
 });
 
 // create new product
@@ -116,6 +112,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
+// delete one product by its `id` value
 router.delete('/:id', async (req, res) => {
   const productId = req.params.id
   const productToDelete = await Product.destroy({
@@ -124,7 +121,6 @@ router.delete('/:id', async (req, res) => {
     }
   });
   res.json(productToDelete)
-  // delete one product by its `id` value
 });
 
 module.exports = router;
