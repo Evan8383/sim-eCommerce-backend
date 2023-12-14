@@ -19,6 +19,7 @@ router.get('/:id', async (req, res) => {
       Product
     ]
   })
+  if (!tag) return res.status(404).json(`Could not find tag with the id: ${tagId}`)
   res.json(tag)
 });
 
@@ -40,9 +41,30 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', (req, res) => {
   // update a tag's name by its `id` value
+  
+
+
+
+
+
+
+
+
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
+  try {
+    const tagId = req.params.id
+    const deletedTag = await Tag.destroy({
+      where: {
+        id: tagId
+      }
+    })
+    if (!deletedTag) return res.status(404).json(`Could not find tag with the id: ${tagId}`)
+    res.status(200).json(deletedTag)
+  } catch(err) {
+    res.status(500).json(err)
+  }
   // delete on tag by its `id` value
 });
 
