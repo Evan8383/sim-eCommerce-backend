@@ -15,6 +15,8 @@ The application uses environment variables for sensitive information like databa
 ## Links
 - Demo video: 
   https://watch.screencastify.com/v/Wi5OtCXSL4bJEAP4wxoc
+  
+[eCommerce-Backend.webm](https://github.com/Evan8383/sim-eCommerce-backend/assets/138387806/8393bf49-48b0-4983-9295-59d0b61dfb4d)
 
 - Repo link:
   https://github.com/Evan8383/sim-eCommerce-backend
