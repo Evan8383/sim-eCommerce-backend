@@ -12,6 +12,14 @@ The application's structure is as follows:
 - `server.js`: The entry point for the application.
 
 The application uses environment variables for sensitive information like database credentials. These are not included in the repository and should be added to a `.env` file in the root of the project.
+## Links
+- Demo video: 
+  https://watch.screencastify.com/v/Wi5OtCXSL4bJEAP4wxoc
+
+- Repo link:
+  https://github.com/Evan8383/sim-eCommerce-backend
+
+## Screenshots
 
 ## Table of Contents
 
